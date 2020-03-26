@@ -58,6 +58,21 @@
                 </v-row>
             </v-container>
         </v-content>
+          <v-footer class="indigo justify-center pl-0" padless inset app>
+            <v-card flat tile class="indigo  white--text text-center">
+                <v-card-text class="white--text">
+                    <p>Luaskan ilmu, luaskan manfaat <br>
+
+                        [ ] dengan <span class="red--text"> ❤ </span>
+                        <!-- <q-spinner-hearts class="animated 2s infinite fadeIn" color="red" size="2.5em" /> -->
+                        di Palu</p>
+                    ©2020 — Imam Satya Wedhatama 
+
+
+                    <!-- {{ new Date().getFullYear() }} — <strong>Vuetify</strong> -->
+                </v-card-text>
+            </v-card>
+        </v-footer>
     </v-app>
 
     <!-- <div class="container">
