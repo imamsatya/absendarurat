@@ -6,7 +6,8 @@
                     <v-col cols="12" sm="8" md="4">
                         <v-card class="elevation-12">
                             <v-toolbar color="primary" dark flat>
-                                <v-toolbar-title>Import Absen</v-toolbar-title>
+                               
+                                <v-toolbar-title> <v-icon>mdi-file-import-outline</v-icon> <span> Import Absen</span></v-toolbar-title>
                                 <v-spacer />
                                 <!-- <v-tooltip bottom>
                                     <template v-slot:activator="{ on }">
@@ -15,16 +16,16 @@
                                         </v-btn>
                                     </template>
                                     <span>Source</span>
-                                </v-tooltip>
+                                </v-tooltip> -->
                                 <v-tooltip right>
                                     <template v-slot:activator="{ on }">
-                                        <v-btn icon large href="https://codepen.io/johnjleider/pen/pMvGQO"
-                                            target="_blank" v-on="on">
-                                            <v-icon>mdi-codepen</v-icon>
+                                        <v-btn icon 
+                                            target="_blank" v-on="on" @click="dialogPanduan">
+                                            <v-icon>mdi-help-circle</v-icon>
                                         </v-btn>
                                     </template>
-                                    <span>Codepen</span>
-                                </v-tooltip> -->
+                                    <span>Panduan</span>
+                                </v-tooltip>
                             </v-toolbar>
                             <v-card-text>
                                 <!-- <v-form >
@@ -58,6 +59,8 @@
                 </v-row>
             </v-container>
         </v-content>
+
+        
           <v-footer class="indigo justify-center pl-0" padless inset app>
             <v-card flat tile class="indigo  white--text text-center">
                 <v-card-text class="white--text">
@@ -73,6 +76,48 @@
                 </v-card-text>
             </v-card>
         </v-footer>
+
+        <!-- dialog -->
+        <div class="text-center">
+    <v-dialog
+      v-model="dialog_panduan"
+      width="500"
+    >
+
+      <v-card>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+        >
+          Panduan
+        </v-card-title>
+
+        <v-card-text>
+            Halo - halo semuanya, semoga tetap sehat seperti para atlet yang siap untuk berlaga.Berikut cara penggunaannya : <br><br>
+
+          1. Input File adalah File berformat CSV yang diperoleh dari aplikasi Kaizala <br>
+          2. Pastikan Kolom A adalah "Responder Name" dan Kolom H adalah "Server Receipt Timestamp (UTC)". Kalau bukan? ya dibuat begitu aja :D
+          <br><br>
+
+          Jaga kesehatan selalu ya teman - teman, semoga aplikasinya bermanfaat :)
+
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="primary"
+            text
+            @click="dialog_panduan = false"
+          >
+            OKE
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
     </v-app>
 
     <!-- <div class="container">
@@ -114,10 +159,14 @@
 
                 file: '',
 
-                success: ''
+                success: '',
+                dialog_panduan: false,
             }
         },
         methods: {
+            dialogPanduan(){
+                this.dialog_panduan = true;
+            },
             onFileChange(e) {
 
                 console.log(e.target.files[0]);
