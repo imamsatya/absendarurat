@@ -55,14 +55,15 @@ class HomeController extends Controller
           for ($i=2; $i < $highestRow+1 ; $i++) { 
               $nama = $spreadsheet->getActiveSheet()->getCell('A'.$i)->getValue();
               
-              $time = $spreadsheet->getActiveSheet()->getCell('H'.$i)->getValue();
+              $time = $spreadsheet->getActiveSheet()->getCell('F'.$i)->getValue();
+             
               $time_fix = substr($time, 2, -4);
               $jam_md = substr($time, 13, -4);
                $jam =substr($time, 13, -10 ) ;
               $md = substr($time, 15, -7);
 
                $convert_jam = (int)$jam+8;
-               
+           
                if ($convert_jam == 24) {
                    $convert_jam = 0;
                }
@@ -71,6 +72,7 @@ class HomeController extends Controller
                    $convert_jam = $convert_jam - 24;
                }
                $convert_full = $convert_jam . $md;
+                
                 //  $a[$i-2]=['nama'=>$nama, 'datang'=>$convert_full, 'pulang'=>''];
             //    $collection->offsetSet('nama', $nama);
             //    $collection->offsetSet('hadir', $convert_full);
@@ -116,7 +118,7 @@ class HomeController extends Controller
                  $worksheet->getCell('D'.$i)->setValue($unique[$i-4]->pulang);//uraian kegiatan           
                
             }
-            
+                // dd($unique);
            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
            
           $writer->save('write.xlsx');

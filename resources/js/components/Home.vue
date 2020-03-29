@@ -96,7 +96,7 @@
             Halo - halo semuanya, semoga tetap sehat seperti para atlet yang siap untuk berlaga.Berikut cara penggunaannya : <br><br>
 
           1. Input File adalah File berformat CSV yang diperoleh dari aplikasi Kaizala <br>
-          2. Pastikan Kolom A adalah "Responder Name" dan Kolom H adalah "Server Receipt Timestamp (UTC)". Kalau bukan? ya dibuat begitu aja :D
+          2. Pastikan Kolom A adalah "Responder Name" dan Kolom F adalah "ResponseTime (UTC)". Kalau bukan? ya dibuat begitu aja :D
           <br><br>
 
           Jaga kesehatan selalu ya teman - teman, semoga aplikasinya bermanfaat :)
@@ -198,28 +198,14 @@
 
                 console.log('formData', formData)
                await axios.post('/proses', formData, configx)
-                    // axios.post('/proses', {formData: this.file})
-
-                    // .then(function (response) {
-                    //     console.log('success')
-                    //     currentObj.success = response.data.success;
-
-                    // })
-
-                    // .catch(function (error) {
-                    //     console.log(error)
-                    //     currentObj.output = error;
-
-                    // });
-
                     .then(response => {
                         console.log(response)
                     }).catch(error => {
                         console.log(error.response)
                     })
-                    .then(
+                   
                window.location.href = "/download_excel/"
-                )
+                
 
             }
 
