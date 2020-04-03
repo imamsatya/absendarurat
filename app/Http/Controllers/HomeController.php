@@ -34,13 +34,14 @@ class HomeController extends Controller
 
     public function proses(Request $request)
     {
-                $fileName = 'input'.'.'.$request->file->getClientOriginalExtension();
+            $fileName = 'input'.'.'.$request->file->getClientOriginalExtension();
 
         $request->file->move(public_path(), $fileName);
          $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('template_rekap.xlsx');
         
          $spreadSheet = new Spreadsheet();
-          $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('input.csv');
+        //   $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('./laravel/public/input.csv');//untuk hosting
+          $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('input.csv');//untuk hosting
 
 
           $cellValue = $spreadsheet->getActiveSheet()->getCell('A1')->getValue();
@@ -55,6 +56,7 @@ class HomeController extends Controller
           for ($i=2; $i < $highestRow+1 ; $i++) { 
               $nama = $spreadsheet->getActiveSheet()->getCell('A'.$i)->getValue();
               
+              $lokasi = $spreadsheet->getActiveSheet()->getCell('E'.$i)->getValue();
               $time = $spreadsheet->getActiveSheet()->getCell('F'.$i)->getValue();
              
               $time_fix = substr($time, 2, -4);
@@ -76,7 +78,7 @@ class HomeController extends Controller
                 //  $a[$i-2]=['nama'=>$nama, 'datang'=>$convert_full, 'pulang'=>''];
             //    $collection->offsetSet('nama', $nama);
             //    $collection->offsetSet('hadir', $convert_full);
-            $collection->push((object)['nama'=>$nama, 'datang'=>$convert_full, 'pulang'=>'']);
+            $collection->push((object)['nama'=>$nama, 'datang'=>$convert_full, 'pulang'=>'', 'lokasi' => $lokasi]);
 
               
           }
@@ -93,7 +95,7 @@ class HomeController extends Controller
                 $a[0]->pulang = $a[count($a)-1]->datang;
                 // dd($a[0]);
                }
-                $collection2->push((object)['nama'=> $a[0]->nama, 'datang'=> $a[0]->datang, 'pulang'=> $a[0]->pulang]);
+                $collection2->push((object)['nama'=> $a[0]->nama, 'datang'=> $a[0]->datang, 'pulang'=> $a[0]->pulang, 'lokasi'=> $a[0]->lokasi]);
            }
              $unique = $collection2->unique()->values();
      
@@ -116,12 +118,13 @@ class HomeController extends Controller
                 $worksheet->getCell('B'.$i)->setValue($unique[$i-4]->nama);//uraian kegiatan
                  $worksheet->getCell('C'.$i)->setValue($unique[$i-4]->datang);//uraian kegiatan
                  $worksheet->getCell('D'.$i)->setValue($unique[$i-4]->pulang);//uraian kegiatan           
+                 $worksheet->getCell('I'.$i)->setValue($unique[$i-4]->lokasi);//uraian kegiatan     
                
             }
                 // dd($unique);
            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
            
-          $writer->save('write.xlsx');
+          $writer->save('./upload/write.xlsx');
               
 
         // return response()->json(['success'=>'You have successfully upload file.']);
@@ -130,7 +133,7 @@ class HomeController extends Controller
      public function download_excel(){
            
            
-             $file="./write.xlsx";
+             $file="./upload/write.xlsx";
         return Response::download($file, 'SehatSehatSemuanya'.'.xlsx') ;
        }
 }

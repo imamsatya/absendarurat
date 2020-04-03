@@ -66,7 +66,7 @@
                 <v-card-text class="white--text">
                     <p>Luaskan ilmu, luaskan manfaat <br>
 
-                        [ ] dengan <span class="red--text"> ❤ </span>
+                        [ ] dengan <span class="red--text animated infinite fadeIn "> ❤ </span>
                         <!-- <q-spinner-hearts class="animated 2s infinite fadeIn" color="red" size="2.5em" /> -->
                         di Palu</p>
                     ©2020 — Imam Satya Wedhatama 
@@ -197,14 +197,14 @@
 
 
                 console.log('formData', formData)
-               await axios.post('/proses', formData, configx)
+               await axios.post('proses', formData, configx)
                     .then(response => {
                         console.log(response)
                     }).catch(error => {
-                        console.log(error.response)
+                        console.log('error', error.response)
                     })
                    
-               window.location.href = "/download_excel/"
+               window.location.href = "/download_excel"
                 
 
             }
