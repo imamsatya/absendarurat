@@ -27,6 +27,6 @@
         "@codekraft-studio/vue-animated": "^0.1.5",
         "animate.css": "^3.7.2",
         "v-animate-css": "0.0.3",
-        "vuetify": "^2.2.19"
+        "vuetify": "^2.6.10"
     }
 }
